@@ -3,15 +3,23 @@
   hosts: localhost
   connection: local
   gather_facts: false
+  vars:
+    vm_name: "vm-teste"
+    hostname: "192.168.22.50"
+    username: "strindade"
+    password: "130395Tary@"
   tasks:
     - name: Clone Template to New Virtual Machine
       community.vmware.vmware_guest:
-        validate_certs: false
         name: "{{ vm_name }}"
+        hostname: "{{ hostname }}"
+        username: "{{ username }}"
+        password: "{{ password }}"
+        validate_certs: false
         template: rhel8 # Input vCenter Template
         datacenter: Datacenter # Input vCenter Datacenter
         resource_pool: # Input Resource Pool
-        folder: "/strindade"
+        folder: "/"
         state: poweredon
         wait_for_ip_address: true
 
